@@ -28,9 +28,9 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['password'])){
         echo 'user already exist , try again later';
     }
     else{
-        if($stmt = $con->prepare('INSERT INTO users (username,password,email) VALUES (?,?,?)')){
+        if($stmt = $con->prepare('INSERT INTO users (username,email,password) VALUES (?,?,?)')){
             $password = password_hash($_POST['password'] , PASSWORD_DEFAULT);
-            $stmt->bind_param('sss' , $_POST['username'],$password , $_POST['email']);
+            $stmt->bind_param('sss' , $_POST['username'], $_POST['email'], $password);
             $stmt->execute();
             echo 'You have succefully registered';
         }
